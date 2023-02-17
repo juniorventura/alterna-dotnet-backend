@@ -16,6 +16,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<INotesService, NotesService>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped(typeof(IGenericService<>), typeof(GenericService<>));
 
 // Setting the connection to the database
 builder.Services.AddDbContext<DotnetTestContext>(op => op.UseNpgsql("name=ConnectionStrings:AlternaDb"));

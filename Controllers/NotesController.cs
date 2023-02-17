@@ -9,9 +9,9 @@ namespace backend_dotnet.Controllers;
 public class NotesController : ControllerBase
 {
     private readonly ILogger<NotesController> _logger;
-    private readonly INotesService _notesService;
+    private readonly IGenericService<Note> _notesService;
 
-    public NotesController(ILogger<NotesController> logger, INotesService notesService)
+    public NotesController(ILogger<NotesController> logger, IGenericService<Note> notesService)
     {
         _logger = logger;
         _notesService = notesService;
@@ -22,7 +22,50 @@ public class NotesController : ControllerBase
     public async Task<IEnumerable<Note>> Get()
     {
         try {
-            return await _notesService.GetNotes();
+            return await _notesService.GetAll();
+        } catch (Exception e) {
+            throw new Exception(e.ToString());
+        }
+    }
+
+    [HttpGet]
+    [Route("{id}")]
+     public async Task<Note?> GetById(long id)
+    {
+        try {
+            return await _notesService.GetById(id);
+        } catch (Exception e) {
+            throw new Exception(e.ToString());
+        }
+    }
+
+    [HttpPost]
+     public async Task<Note> Create([FromBody] Note newNote)
+    {
+        try {
+            return await _notesService.Create(newNote);
+        } catch (Exception e) {
+            throw new Exception(e.ToString());
+        }
+    }
+
+    [HttpPut]
+     public async Task<Note> Put([FromBody] Note updateNote)
+    {
+        try {
+            return await _notesService.Update(updateNote);
+        } catch (Exception e) {
+            throw new Exception(e.ToString());
+        }
+    }
+
+
+    [HttpDelete]
+    [Route("{id}")]
+     public async Task<Note?> Get(long id)
+    {
+        try {
+            return await _notesService.Delete(id);
         } catch (Exception e) {
             throw new Exception(e.ToString());
         }

@@ -19,5 +19,21 @@ namespace Services {
         public async Task<IEnumerable<Note>> GetNotes() {
             return await _notesRepository.GetAll();
         }
+
+        public async Task<Note?> GetById(long id) {
+            return await _notesRepository.Get(id);
+        }
+
+        public async Task<Note> Create(Note newNote) {
+            return await _notesRepository.Add(newNote);
+        }
+
+        public async Task<Note> Update(Note updateNote) {
+            return await _notesRepository.Update(updateNote);
+        }
+
+        public async Task<Note?> Delete(long id) {
+            return await _notesRepository.Delete(id);
+        }
     }
 }
