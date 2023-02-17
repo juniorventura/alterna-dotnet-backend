@@ -1,10 +1,12 @@
 using backend_dotnet.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Interfaces;
 
 namespace backend_dotnet.Controllers;
 
 [ApiController]
+//[Authorize]
 [Route("/api/notes")]
 public class NotesController : ControllerBase
 {

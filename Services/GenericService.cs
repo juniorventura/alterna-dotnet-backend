@@ -1,3 +1,4 @@
+using Hangfire;
 using Repositories.Interfaces;
 using Services.Interfaces;
 
@@ -11,6 +12,7 @@ namespace Services {
         }
 
         public async Task<IEnumerable<T>> GetAll() {
+            var jobId = BackgroundJob.Schedule(() => Console.WriteLine("after 20 seconds"),TimeSpan.FromSeconds(20));
             return await _genericRepository.GetAll();
         }
 
